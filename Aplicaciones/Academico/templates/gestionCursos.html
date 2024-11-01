@@ -2,6 +2,11 @@
 {% block body %}
 <div class="row">
   <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    {%if messages%} {%for message in messages%}
+    <div class="alert alert-dismissible alert-success">
+      <strong class="text-dark">{{message}}</strong>
+    </div>
+    {%endfor%} {%endif%}
     <h2>Gestion de curso</h2>
     <div class="card">
       <div class="card-body">
@@ -32,7 +37,7 @@
           </div>
           <div class="form-group py-2">
             <input
-              type="text"
+              type="number"
               id="txtCreditos"
               name="txtCreditos"
               class="form-control"
@@ -56,13 +61,10 @@
   <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
     <h1>Listado de cursos</h1>
     <div class="table-responsive py-2">
-      {%if messages%} {%for message in messages%}
-      <div class="alert alert-{{message.tags}}" role="alert">{{message}}</div>
-      {%endfor%} {%endif%}
-
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>#</th>
             <th>Codigo</th>
             <th>Nombre</th>
             <th>Creditos</th>
@@ -72,6 +74,7 @@
         <tbody>
           {%for c in cursos%}
           <tr>
+            <td>{{forloop.counter}}</td>
             <td>{{c.codigo}}</td>
             <td>{{c.nombre}}</td>
             <td>{{c.creditos}}</td>
@@ -83,7 +86,9 @@
               >
             </td>
             <td>
-              <a href="eliminarCurso/{{c.codigo}}" class="btn btn-danger"
+              <a
+                href="eliminarCurso/{{c.codigo}}"
+                class="btn btn-danger btnEliminacion"
                 >Eliminar</a
               >
             </td>

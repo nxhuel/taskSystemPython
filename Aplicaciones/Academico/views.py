@@ -7,6 +7,7 @@ from .models import Curso
 
 def home(request):
     listaCursos = Curso.objects.all()
+    # messages.success(request, '¡Cursos listados!')
     return render(request, "gestionCursos.html", {"cursos": listaCursos})
 
 
@@ -17,6 +18,8 @@ def registrarCurso(request):
 
     curso = Curso.objects.create(
         codigo=codigo, nombre=nombre, creditos=creditos)
+
+    messages.success(request, '¡Curso registrado!')
 
     return redirect('/')
 
@@ -36,11 +39,14 @@ def editarCurso(request):
     curso.creditos = creditos
 
     curso.save()
+
+    messages.success(request, '¡Curso actualizado!')
+
     return redirect('/')
 
 
 def eliminarCurso(request, codigo):
     curso = Curso.objects.get(codigo=codigo)
     curso.delete()
-    messages.success(request, 'El curso ha sido eliminado exitosamente.')
+    messages.success(request, '¡Curso eliminado!')
     return redirect('/')
