@@ -1,2 +1,2 @@
 # taskSystemPython
-> Technologies: Python, Django, Bootstrap, MySql
+> Technologies: Python, Django, Bootstrap, Sql Server
